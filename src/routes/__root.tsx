@@ -10,6 +10,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { DefaultCatchBoundary } from "../components/DefaultCatchBoundary"
 import { NotFound } from "../components/NotFound"
 import { QueryClient } from "@tanstack/react-query"
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
+import { Container, CssBaseline, ThemeProvider } from '@mui/material'
+import { theme } from "../setup/theme"
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient
@@ -57,6 +61,19 @@ function RootComponent() {
     )
 }
 
+function Providers({ children }: { children: Readonly<React.ReactNode> }) {
+    const emotionCache = createCache({ key: 'css' })
+
+    return (
+        <CacheProvider value={emotionCache}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                {children}
+            </ThemeProvider>
+        </CacheProvider>
+    )
+}
+
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     return (
         <html lang="en">
@@ -64,9 +81,13 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
                 <HeadContent />
             </head>
             <body>
-                {children}
-                <ReactQueryDevtools buttonPosition="bottom-left" />
-                <Scripts />
+                <Providers>
+                    <Container component="main" sx={{ paddingBlock: 4 }}>
+                        {children}
+                        <ReactQueryDevtools buttonPosition="bottom-left" />
+                    </Container>
+                    <Scripts />
+                </Providers>
             </body>
         </html>
     )
