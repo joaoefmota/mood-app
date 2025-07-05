@@ -14,6 +14,7 @@ import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { Container, CssBaseline, ThemeProvider } from '@mui/material'
 import { theme } from "../setup/theme"
+// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient
@@ -28,7 +29,7 @@ export const Route = createRootRouteWithContext<{
                 content: 'width=device-width, initial-scale=1',
             },
             {
-                title: 'TanStack Start Starter',
+                title: 'Mood Tracker App',
             },
         ],
         links: [{
@@ -36,8 +37,8 @@ export const Route = createRootRouteWithContext<{
             href: '/src/styles/globals.css',
         }],
         ...seo({
-            title: 'TanStack Start Starter',
-            description: 'A starter template for TanStack Start with React.',
+            title: 'Mood Tracker App',
+            description: 'Track your daily mood and emotions with this beautiful mood tracker.',
             image: 'https://tanstack.dev/start/og-image.png',
             keywords: 'tanstack, start, react, starter, template',
         })
@@ -61,7 +62,7 @@ function RootComponent() {
     )
 }
 
-function Providers({ children }: { children: Readonly<React.ReactNode> }) {
+function Providers({ children }: { children: React.ReactNode }) {
     const emotionCache = createCache({ key: 'css' })
 
     return (
@@ -85,6 +86,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
                     <Container component="main" sx={{ paddingBlock: 4 }}>
                         {children}
                         <ReactQueryDevtools buttonPosition="bottom-left" />
+                        {/* <TanStackRouterDevtools position="bottom-right" /> */}
                     </Container>
                     <Scripts />
                 </Providers>
