@@ -14,7 +14,7 @@ import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { Container, CssBaseline, ThemeProvider } from '@mui/material'
 import { theme } from "../setup/theme"
-// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient
@@ -86,7 +86,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
                     <Container component="main" sx={{ paddingBlock: 4 }}>
                         {children}
                         <ReactQueryDevtools buttonPosition="bottom-left" />
-                        {/* <TanStackRouterDevtools position="bottom-right" /> */}
+                        <TanStackRouterDevtools position="bottom-right" />
                     </Container>
                     <Scripts />
                 </Providers>

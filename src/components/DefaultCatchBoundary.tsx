@@ -6,6 +6,8 @@ import {
     useRouter,
 } from '@tanstack/react-router'
 import type { ErrorComponentProps } from '@tanstack/react-router'
+import { Box, Button, Stack } from '@mui/material'
+import { Refresh, Home, ArrowBack } from '@mui/icons-material'
 
 export function DefaultCatchBoundary({ error }: Readonly<ErrorComponentProps>) {
     const router = useRouter()
@@ -17,37 +19,77 @@ export function DefaultCatchBoundary({ error }: Readonly<ErrorComponentProps>) {
     console.error(error)
 
     return (
-        <div className="min-w-0 flex-1 p-4 flex flex-col items-center justify-center gap-6">
+        <Box
+            sx={{
+                minWidth: 0,
+                flex: 1,
+                p: 4,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 6
+            }}
+        >
             <ErrorComponent error={error} />
-            <div className="flex gap-2 items-center flex-wrap">
-                <button
+            <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap', gap: 1 }}>
+                <Button
                     onClick={() => {
                         router.invalidate()
                     }}
-                    className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
+                    variant="contained"
+                    color="inherit"
+                    startIcon={<Refresh />}
+                    size="small"
+                    sx={{
+                        textTransform: 'uppercase',
+                        fontWeight: 'bold',
+                        bgcolor: 'grey.600',
+                        '&:hover': { bgcolor: 'grey.700' }
+                    }}
                 >
                     Try Again
-                </button>
+                </Button>
                 {isRoot ? (
-                    <Link
+                    <Button
+                        component={Link}
                         to="/"
-                        className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
+                        variant="contained"
+                        color="inherit"
+                        startIcon={<Home />}
+                        size="small"
+                        sx={{
+                            textTransform: 'uppercase',
+                            fontWeight: 'bold',
+                            bgcolor: 'grey.600',
+                            '&:hover': { bgcolor: 'grey.700' }
+                        }}
                     >
                         Home
-                    </Link>
+                    </Button>
                 ) : (
-                    <Link
+                    <Button
+                        component={Link}
                         to="/"
-                        className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
+                        variant="contained"
+                        color="inherit"
+                        startIcon={<ArrowBack />}
+                        size="small"
+                        sx={{
+                            textTransform: 'uppercase',
+                            fontWeight: 'bold',
+                            bgcolor: 'grey.600',
+                            '&:hover': { bgcolor: 'grey.700' }
+                        }}
                         onClick={(e) => {
                             e.preventDefault()
                             window.history.back()
                         }}
                     >
                         Go Back
-                    </Link>
+                    </Button>
                 )}
-            </div>
-        </div>
+            </Stack>
+        </Box>
     )
 }

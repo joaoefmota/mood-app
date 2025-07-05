@@ -1,25 +1,36 @@
 import { Link } from '@tanstack/react-router'
+import { Box, Typography, Button, Stack } from '@mui/material'
+import { ArrowBack, Home } from '@mui/icons-material'
 
 export function NotFound({ children }: { readonly children?: React.ReactNode }) {
     return (
-        <div className="space-y-2 p-2">
-            <div className="text-gray-600 dark:text-gray-400">
-                {children ?? <p>The page you are looking for does not exist.</p>}
-            </div>
-            <p className="flex items-center gap-2 flex-wrap">
-                <button
+        <Box sx={{ p: 2 }}>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+                {children ?? 'The page you are looking for does not exist.'}
+            </Typography>
+            <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap', gap: 1 }}>
+                <Button
                     onClick={() => window.history.back()}
-                    className="bg-emerald-500 text-white px-2 py-1 rounded uppercase font-black text-sm"
+                    variant="contained"
+                    color="success"
+                    startIcon={<ArrowBack />}
+                    size="small"
+                    sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
                 >
                     Go back
-                </button>
-                <Link
+                </Button>
+                <Button
+                    component={Link}
                     to="/"
-                    className="bg-cyan-600 text-white px-2 py-1 rounded uppercase font-black text-sm"
+                    variant="contained"
+                    color="info"
+                    startIcon={<Home />}
+                    size="small"
+                    sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
                 >
                     Start Over
-                </Link>
-            </p>
-        </div>
+                </Button>
+            </Stack>
+        </Box>
     )
 }
