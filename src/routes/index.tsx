@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { Stack, Typography } from '@mui/material'
 import z from 'zod'
 import { Counter } from "~/components/Counter"
@@ -17,6 +17,9 @@ function RouteComponent() {
                 Hello world!
             </Typography>
             <Counter />
+            <Link to="/test" style={{ marginTop: 16 }}>
+                Go to /test
+            </Link>
         </Stack>
     )
 }

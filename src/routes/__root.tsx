@@ -43,14 +43,6 @@ export const Route = createRootRouteWithContext<{
             keywords: 'tanstack, start, react, starter, template',
         })
     }),
-    errorComponent: (props) => {
-        return (
-            <RootDocument>
-                <DefaultCatchBoundary {...props} />
-            </RootDocument>
-        )
-    },
-    notFoundComponent: () => <NotFound />,
     component: RootComponent,
 })
 
@@ -85,11 +77,11 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
                 <Providers>
                     <Container component="main" sx={{ paddingBlock: 4 }}>
                         {children}
-                        <ReactQueryDevtools buttonPosition="bottom-left" />
-                        <TanStackRouterDevtools position="bottom-right" />
                     </Container>
-                    <Scripts />
                 </Providers>
+                <ReactQueryDevtools buttonPosition="bottom-left" />
+                <TanStackRouterDevtools position="bottom-right" />
+                <Scripts />
             </body>
         </html>
     )

@@ -1,8 +1,16 @@
 {
+  "name": "tanstack-moodapp",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build"
+    "build": "vite build",
+    "build:node": "npm run build --preset node-server",
+    "start:node": "node .output/server/index.mjs"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -29,12 +37,5 @@
     "@types/react-dom": "^19.1.6",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4"
-  },
-  "name": "tanstack-moodapp",
-  "version": "1.0.0",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
